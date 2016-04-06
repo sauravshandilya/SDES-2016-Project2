@@ -1,7 +1,9 @@
-
+#from serial_connection import *
+import serial_connection as sc
 global value
 global register_name
 global send_data_buffer
+global port
 
 value = 0
 register_name = 0
@@ -19,47 +21,68 @@ for i in range (0,8):
 for j in range (0,8):
     globals()["reset_PIN"+str(j)] = 2**j
     
-def port_relsset_dir(register_name,pin_name):
+def port_reset_dir(register_name,pin_name):
     global value
-    value &= ~(pin_name)
-    send_data_buffer.append (register_name) 
-    send_data_buffer.append (value)
+    global port
+
+    value = ~(pin_name)
+    send_data_buffer.append ('0')
+    send_data_buffer.append (chr(register_name)) 
+    send_data_buffer.append (chr(value))
     print "Direction reset",send_data_buffer
+    for i in range(0,len(send_data_buffer)):
+	sc.port.write(str(send_data_buffer[i]))
+	print str(send_data_buffer[i])
         
 def port_set_dir(register_name,pin_name):
     global send_data_buffer,value
+    global port
     send_data_buffer = []
-    value |= pin_name    
-    send_data_buffer.append (register_name) 
-    send_data_buffer.append (value) 
+    value = pin_name
+    send_data_buffer.append ('1')    
+    send_data_buffer.append (str(register_name))
+    send_data_buffer.append (str(value))
     #print pin_name
     print "Direction set",send_data_buffer
-    return value
+    for i in range(0,len(send_data_buffer)):
+        sc.port.write(send_data_buffer[i])
+    print str(send_data_buffer[0])
+    print send_data_buffer[1]
+    #return value
     
 def port_reset_value(register_name,pin_name):
-    global value
+    global value,port
     send_data_buffer = []
     value &= ~(pin_name)
-    send_data_buffer.append (register_name) 
-    send_data_buffer.append (value)
+    send_data_buffer.append ('0')
+    send_data_buffer.append (chr(register_name))
+    send_data_buffer.append (chr(value))
     print "Value reset",send_data_buffer
+    for i in range(0,len(send_data_buffer)):
+        sc.port.write(str(send_data_buffer[i]))
+        print str(send_data_buffer[i])
         
 def port_set_value(register_name,pin_name):
-    global send_data_buffer,value
+    global send_data_buffer,value,port
     send_data_buffer = []
-    value |= pin_name    
-    send_data_buffer.append (register_name) 
-    send_data_buffer.append (value) 
+    value = pin_name
+    send_data_buffer.append ('1')    
+    send_data_buffer.append (str(register_name))
+    send_data_buffer.append (str(value)) 
     #print pin_name
     print "value set",send_data_buffer
-    return value
+    for i in range(0,len(send_data_buffer)):
+        sc.port.write(send_data_buffer[i])
+        print str(send_data_buffer[i])
+    #return value
     
     
-port_set_dir(DDRJ,PIN0|PIN2|PIN1)
+if __name__ == "__main__":
+     port_set_dir(DDRJ,PIN0|PIN2|PIN1)
 
-port_set_value(PORTJ,PIN2|PIN1|PIN0)
-port_reset_value(PORTJ,PIN2)
-port_set_value(PORTJ,PIN2)
+     port_set_value(PORTJ,PIN2|PIN1|PIN0)
+     port_reset_value(PORTJ,PIN2)
+     port_set_value(PORTJ,PIN2)
 
 #port_dir(DDRA,reset_PIN2)
 ##reset_PIN(DDRA,reset_PIN2
