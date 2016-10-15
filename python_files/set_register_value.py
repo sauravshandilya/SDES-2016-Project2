@@ -75,7 +75,8 @@ def port_set_value(register_name,pin_name):
         sc.port.write(send_data_buffer[i])
         print str(send_data_buffer[i])
     #return value
-    
+
+
     
 if __name__ == "__main__":
      port_set_dir(DDRJ,PIN0|PIN2|PIN1)
