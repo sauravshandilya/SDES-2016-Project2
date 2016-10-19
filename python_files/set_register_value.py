@@ -1,5 +1,6 @@
 #from serial_connection import *
 import serial_connection as sc
+import time
 global value
 global register_name
 global send_data_buffer
@@ -15,96 +16,54 @@ value = 0
 register_name = 0
 send_data_buffer = []
 
-DDRJ = 1
-PORTJ = 2
-PINJ = 3
+DDRJ    = 1
+PORTJ   = 2
+PINJ    = 3
 
+DDRC    = 4
+PORTC   = 5
+PINC    = 6
 
-# values for defining a global variable set_PINx for setting any register bit
+# values for defining a global variable PINx - used as pin_name variable in config_register() function
 for i in range (0,8):
     globals()["PIN"+str(i)] = 2**i
     
-for j in range (0,8):
-    globals()["reset_PIN"+str(j)] = 2**j
-    
 def config_register(register_name,pin_name,flag):
+    """
+    config register : set/reset pin of various register of controller
+    parameter: 
+    register_name (As in DDRA, DDRB,DDRC .. , PORTA,PORTB,PORTC, ...PINA,PINB,PINC)
+    pin_name: PIN0 PIN1 upto PIN7 (in order to set multiple pin use | operator)
+    flag: set_pins,reset_pins - to pull pins HIGH logic and LOW logic respectively
+    Example Call: config_register(DDRA,PIN0|PIN1,set_pins)
+    """
     #global set_flag
     global port 
     global send_data_buffer
     
     send_data_buffer = []
 
-    send_data_buffer.append (chr(register_name))
     send_data_buffer.append (chr(pin_name))
+    send_data_buffer.append (chr(register_name))
     send_data_buffer.append (chr(flag))
 
-    print send_data_buffer
-
-def port_reset_dir(register_name,pin_name):
-    global value
-    global port
-
-    value = ~(pin_name)
-    send_data_buffer.append ('0')
-    send_data_buffer.append (chr(register_name))
+    for i in range (len(send_data_buffer)):
+        sc.port.write(send_data_buffer[i])
     
-    send_data_buffer.append (chr(value))
-    print "Direction reset",send_data_buffer
-    for i in range(0,len(send_data_buffer)):
-	sc.port.write(send_data_buffer[i])
-	print str(send_data_buffer[i])
-        
-def port_set_dir(register_name,pin_name):
-    global send_data_buffer,value
-    global port
-    send_data_buffer = []
-    value = pin_name
-    send_data_buffer.append ('1')    
-    send_data_buffer.append (chr(register_name))
-    send_data_buffer.append (chr(value))
-    #print pin_name
-    print "Direction set",send_data_buffer
-    for i in range(0,len(send_data_buffer)):
-        sc.port.write(send_data_buffer[i])
-    print str(send_data_buffer[0])
-    print send_data_buffer[1]
-    #return value
-    
-def port_reset_value(register_name,pin_name):
-    global value,port
-    send_data_buffer = []
-    value &= ~(pin_name)
-    send_data_buffer.append ('0')
-    send_data_buffer.append (chr(register_name))
-    send_data_buffer.append (chr(value))
-    print "Value reset",send_data_buffer
-    for i in range(0,len(send_data_buffer)):
-        sc.port.write(send_data_buffer[i])
-        print str(send_data_buffer[i])
-        
-def port_set_value(register_name,pin_name):
-    global send_data_buffer,value,port
-    send_data_buffer = []
-    value = pin_name
-    send_data_buffer.append ('1')    
-    send_data_buffer.append (chr(register_name))
-    send_data_buffer.append (chr(value)) 
-    #print pin_name
-    print "value set",send_data_buffer
-    for i in range(0,len(send_data_buffer)):
-        sc.port.write(send_data_buffer[i])
-        print str(send_data_buffer[i])
-    #return value
+    # print send_data_buffer
 
+    return send_data_buffer
 
     
 if __name__ == "__main__":
-     # port_set_dir(DDRJ,PIN0|PIN2|PIN1)
-     # port_set_value(PORTJ,PIN2|PIN1|PIN0)
-     # port_reset_value(PORTJ,PIN2)
-     # port_set_value(PORTJ,PIN2)
-     config_register(DDRJ,PIN1|PIN0|PIN2, set_pins)
-     config_register(DDRJ,PIN1|PIN0|PIN2, reset_pins)
-
-#port_dir(DDRA,reset_PIN2)
-##reset_PIN(DDRA,reset_PIN2
+     sc.serial_open()
+     config_register(DDRJ,PIN0|PIN1|PIN2|PIN3|PIN4|PIN5|PIN6|PIN7, set_pins)
+     config_register(DDRC,PIN3,set_pins)
+     for x in range(0,5):   
+         config_register(PORTJ,PIN0|PIN1|PIN2,set_pins)
+         config_register(PORTC,PIN3,set_pins)
+         time.sleep(1)
+         config_register(PORTJ,PIN0|PIN1|PIN2,reset_pins)
+         config_register(PORTC,PIN3,reset_pins)
+         time.sleep(1)
+sc.serial_close()
