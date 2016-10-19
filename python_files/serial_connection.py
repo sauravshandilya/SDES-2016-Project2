@@ -32,7 +32,7 @@ def serial_port_connection(port_detect):
 	Function: Multiple serial devices may be connected to system. 
 	This function list down all connected serial link and ask user to select a desired link.
 
-	Baud Rate: 9600 (by default)
+	Baud Rate: 9600 (by default). To change baudrate 
 	
 	port_detect: comes from another function serial_open() which detects all serial devices connected to system
 	'''
@@ -114,5 +114,11 @@ def serial_open():
 
 #**********************Close Communication/Serial Port Starts*********************	
 def serial_close():
+	"""
+	Description: Close serial port
+
+	Parameter: None
+
+	"""
 	port.close()
 #**********************Close Communication/Serial Port Ends*********************

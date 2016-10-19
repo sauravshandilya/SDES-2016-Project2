@@ -41,9 +41,13 @@ def config_register(register_name,pin_name,flag):
     send_data_buffer.append (chr(pin_name))
     send_data_buffer.append (chr(register_name))
     send_data_buffer.append (chr(flag))
+
     for i in range (len(send_data_buffer)):
-	sc.port.write(send_data_buffer[i])
+    	sc.port.write(send_data_buffer[i])
     print send_data_buffer
+
+    return send_data_buffer
+
 
 def port_reset_dir(register_name,pin_name):
     global value
