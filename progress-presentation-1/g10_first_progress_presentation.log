@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.9.12)  20 OCT 2016 04:00
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.9.12)  20 OCT 2016 04:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -865,17 +865,27 @@ LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for U+msa on input line 31.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 31.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [2
 
 ]
-<images/system_diagram.png, id=30, 897.3525pt x 337.26pt>
+<images/system_diagram.png, id=32, 897.3525pt x 337.26pt>
 File: images/system_diagram.png Graphic file (type png)
 
 <use images/system_diagram.png>
-Package pdftex.def Info: images/system_diagram.png used on input line 32.
+Package pdftex.def Info: images/system_diagram.png used on input line 37.
 (pdftex.def)             Requested size: 314.07808pt x 118.04276pt.
 
-Overfull \hbox (6.78821pt too wide) in paragraph at lines 32--32
+Overfull \hbox (6.78821pt too wide) in paragraph at lines 37--37
 [][]  
  []
 
@@ -883,17 +893,7 @@ Overfull \hbox (6.78821pt too wide) in paragraph at lines 32--32
 
  <./images/system_diagram.png>] [4
 
-]
-LaTeX Font Info:    Try loading font information for U+msa on input line 60.
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 60.
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [5
+] [5
 
 ]
 \tf@nav=\write6
@@ -905,12 +905,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@snm=\write8
 \openout8 = `g10_first_progress_presentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 63.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 63.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 68.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 68.
 
 (./g10_first_progress_presentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 63.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 63.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 68.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 68.
 Package rerunfilecheck Info: File `g10_first_progress_presentation.out' has not
  changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
@@ -919,13 +919,13 @@ Package rerunfilecheck Info: File `g10_first_progress_presentation.out' has not
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 63.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 68.
  ) 
 Here is how much of TeX's memory you used:
- 15687 strings out of 494999
- 294091 string characters out of 6180228
- 369259 words of memory out of 5000000
- 18516 multiletter control sequences out of 15000+600000
+ 15702 strings out of 494999
+ 294202 string characters out of 6180228
+ 368259 words of memory out of 5000000
+ 18531 multiletter control sequences out of 15000+600000
  7915 words of font info for 30 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  49i,15n,53p,437b,454s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -934,7 +934,7 @@ r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb>
-Output written on g10_first_progress_presentation.pdf (5 pages, 402681 bytes).
+Output written on g10_first_progress_presentation.pdf (5 pages, 403168 bytes).
 PDF statistics:
  74 PDF objects out of 1000 (max. 8388607)
  52 compressed objects within 1 object stream
