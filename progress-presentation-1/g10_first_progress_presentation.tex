@@ -3,6 +3,11 @@
 \usecolortheme{seahorse}
 \usepackage{amsmath}
 
+\usepackage{listings}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+
+
 \usepackage{graphicx} %%For loading image files
 \graphicspath{ {images/} } %folder-location for images
 
@@ -16,10 +21,13 @@
   
 }
 \date[\today] % (optional)
-{Prof. Prabhu Ramchandra \\ PRof. Madhu Belur \\ Prof. Kumar Appaiah}
+{Prof. Prabhu Ramchandran \\ Prof. Madhu Belur \\ Prof. Kumar Appaiah}
 %\subject{Computer Science}
 
-\begin{document}
+\begin{document} 
+	\lstset{language=C,commentstyle=\color{mygreen},showspaces=true,   
+		showstringspaces=false, basicstyle=\footnotesize,  
+		breakatwhitespace=false,keepspaces=true,            breaklines=true,stepnumber=1,showspaces=false} 
 \frame{\titlepage}
 
 \begin{frame}{Objective}
@@ -46,7 +54,9 @@
 \end{enumerate}
 
 \end{frame}
-
+\begin{frame}{User code snippet}
+	\lstinputlisting[language=Python]{snippet.py}
+\end{frame}
 \begin{frame}{Future Work}
 \begin{itemize}
 \item Develop and test object-oriented implementation
@@ -63,6 +73,8 @@
 \end{itemize}
 
 \end{frame}
+
+
 
 
 \end{document}
