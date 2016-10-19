@@ -1,9 +1,13 @@
 \documentclass[10pt,handout,english]{beamer}
 \usetheme{Berlin}
 \usecolortheme{seahorse}
-
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{multimedia}
+\usepackage{media9}
+\addmediapath{./Movies/}
 \title[] % (optional, only for long titles)
-{Python API for Mobile Robots}
+{Python API for Mobile Robot}
 \subtitle{Progress Presentation-1}
 \author[Author, Anders] % (optional, for multiple authors)
 {Saurav Shandilya (153076004) \\ Parin Chheda (153076005)}
@@ -19,7 +23,11 @@
 \frame{\titlepage}
 
 \begin{frame}{Objective}
-
+\begin{enumerate}
+	\item A Python API to control the different peripherals of the ${\mu}$controller
+	\item Provide the user with a option of register level access of the ${\mu}$controller
+	\item Allow the user to design an application without learning a new language and thoroughly knowing the architecture of the controller.
+\end{enumerate}
 \end{frame}
 
 \begin{frame}{Block Diagram}
@@ -34,5 +42,15 @@
 
 \end{frame}
 
+\begin{frame}
+\frametitle{Demo}
+
+\begin{center}
+	\includemedia[
+	activate=onclick,
+	width=0.75\textwidth
+	]{\includegraphics{FK3.png}}{FK3.swf}
+\end{center}
+\end{frame}
 
 \end{document}
