@@ -2,9 +2,14 @@
 \usetheme{Berlin}
 \usecolortheme{seahorse}
 \usepackage{amsmath}
+
 \usepackage{listings}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 \definecolor{mygreen}{rgb}{0,0.6,0}
+
+
+\usepackage{graphicx} %%For loading image files
+\graphicspath{ {images/} } %folder-location for images
 
 \title[] % (optional, only for long titles)
 {Python API for Mobile Robot Control}
@@ -16,7 +21,7 @@
   
 }
 \date[\today] % (optional)
-{Prof. Prabhu Ramchandra \\ PRof. Madhu Belur \\ Prof. Kumar Appaiah}
+{Prof. Prabhu Ramchandran \\ Prof. Madhu Belur \\ Prof. Kumar Appaiah}
 %\subject{Computer Science}
 
 \begin{document} 
@@ -33,19 +38,43 @@
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Block Diagram}
+\begin{frame}{System Architecture}
+
+\includegraphics[scale = 0.35]{system_diagram}
 
 \end{frame}
 
 \begin{frame}{Milestone Achieved}
+\begin{enumerate}
+\item Robot-end firmware - written in embedded C
+\item Serial Communication between Raspberry Pi and Robot
+\item Function for configuring all IO Ports and Pins of microcontroller
+\item Implemented and tested code for Buzzer and BarLED.  
+\item Test code for Port and Pin configuration function
+\end{enumerate}
 
 \end{frame}
-
-\begin{frame}{Future Work}
-
-\end{frame}
-
 \begin{frame}{User code snippet}
 	\lstinputlisting[language=Python]{snippet.py}
 \end{frame}
+\begin{frame}{Future Work}
+\begin{itemize}
+\item Develop and test object-oriented implementation
+\item Access following peripherals for ${\mu}$controller
+	\begin{itemize}
+	\item Timers
+	\item ADC
+	\item Interrupt
+	\item I2C
+	\end{itemize}
+\item Improve data packet by incorporating checksum, end of packet payload to existing system.
+\item Design PyQT GUI for making SFTP connection to Raspberry Pi from PC
+\item Provide higher level abstraction for peripheral devices  
+\end{itemize}
+
+\end{frame}
+
+
+
+
 \end{document}
