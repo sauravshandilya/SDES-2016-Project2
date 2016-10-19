@@ -2,6 +2,10 @@
 \usetheme{Berlin}
 \usecolortheme{seahorse}
 \usepackage{amsmath}
+\usepackage{listings}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+
 \title[] % (optional, only for long titles)
 {Python API for Mobile Robot Control}
 \subtitle{Progress Presentation-1}
@@ -15,7 +19,10 @@
 {Prof. Prabhu Ramchandra \\ PRof. Madhu Belur \\ Prof. Kumar Appaiah}
 %\subject{Computer Science}
 
-\begin{document}
+\begin{document} 
+	\lstset{language=C,commentstyle=\color{mygreen},showspaces=true,   
+		showstringspaces=false, basicstyle=\footnotesize,  
+		breakatwhitespace=false,keepspaces=true,            breaklines=true,stepnumber=1,showspaces=false} 
 \frame{\titlepage}
 
 \begin{frame}{Objective}
@@ -38,4 +45,7 @@
 
 \end{frame}
 
+\begin{frame}{User code snippet}
+	\lstinputlisting[language=Python]{snippet.py}
+\end{frame}
 \end{document}
