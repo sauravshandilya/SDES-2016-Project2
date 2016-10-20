@@ -14,14 +14,14 @@
 \title[] % (optional, only for long titles)
 {Python API for Mobile Robot Control}
 \subtitle{Progress Presentation-1}
-\author[AE-663 Course Project ] % (optional, for multiple authors)
+\author[AE-663 Course Project 2016-17] % (optional, for multiple authors)
 {Parin Chheda (153076005) \\ Saurav Shandilya (153076004) \\ Group-10 }
 \institute [Indian Institute of Technology Bombay]% (optional)
 {
   
 }
 \date[\today] % (optional)
-{Prof. Prabhu Ramchandran \\ Prof. Madhu Belur \\ Prof. Kumar Appaiah}
+{Prof. Prabhu Ramachandran \\ Prof. Madhu Belur \\ Prof. Kumar Appaiah}
 %\subject{Computer Science}
 
 \begin{document} 
@@ -54,8 +54,32 @@
 \end{enumerate}
 
 \end{frame}
+
 \begin{frame}{User code snippet}
 	\lstinputlisting[language=Python]{snippet.py}
+\end{frame}
+
+\begin{frame}{Implementation}
+Data Packet Format \\[4mm]
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline  set/rest & Function id & Register id  & Pin value \\ 
+\hline  1-bit& 7-bit & 8-bit  & 8-bit  \\ 
+\hline 
+\end{tabular}
+\end{center}
+
+\vspace{3mm}
+
+\textbf{set/reset (1-bit)}: This bit decides whether value a register bit is set high or reset to low \\[1mm]
+
+\textbf{Function id (7-bit)}: These bits select various ${\mu}$controller peripherals Example: IO,ADC,Timers,I2C etc \\[1mm]
+
+\textbf{Register id (8-bit)}: These bits select registers present to access ${\mu}$controller peripherals. Example: DDRA,PORTA, ADCSRA,ADMUX etc \\[1mm]
+
+\textbf{Pin Value (8-bit)}: These bits select value to be written on 8-bit registers
+
+
 \end{frame}
 \begin{frame}{Future Work}
 \begin{itemize}
