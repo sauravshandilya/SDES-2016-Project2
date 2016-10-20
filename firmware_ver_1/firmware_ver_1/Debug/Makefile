@@ -35,7 +35,7 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../CFile1.c
+../main.c
 
 
 PREPROCESSING_SRCS += 
@@ -45,19 +45,19 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-CFile1.o
+main.o
 
 
 OBJS_AS_ARGS +=  \
-CFile1.o
+main.o
 
 
 C_DEPS +=  \
-CFile1.d
+main.d
 
 
 C_DEPS_AS_ARGS +=  \
-CFile1.d
+main.d
 
 
 OUTPUT_FILE_PATH +=firmware_ver_1.elf
