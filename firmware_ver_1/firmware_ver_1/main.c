@@ -1,17 +1,28 @@
 //Initial firmware code for FBV robot (Atmega 2560)
 
 
+#define  F_CPU 14745600
+
+//Include header files
 #include <avr/io.h>
 #include <stdint.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
-//#include "firmware.h"
 #include "lcd.h"
 
-volatile unsigned char receive_buffer[4]={0,0,0,0};
-unsigned char* receive_buffer_pointer;
+
+//macros for writing data to register
+#define set_bits_macro(port,mask) ((*port) |= (mask))
+#define clear_bits_macro(port,mask) ((*port) &= ~(mask))
+
+//buffer for receiving serial data
+volatile unsigned char receive_buffer[3]={0,0,0};
+
+unsigned char* receive_buffer_pointer; //pointer to receive buffer
 volatile unsigned char ser_receive;
-volatile char flag=1;
+volatile char flag=1; //flag to count the bytes received
+const uint16_t *port[]={0x00,0x104,0x105,0x00,0x27,0x28}; //pointers to register address
+
 
 //Function To Initialize UART2
 // desired baud rate:9600
@@ -47,34 +58,25 @@ int main(void)
 {
 	serial_init();
 	lcd_port_config();
-	lcd_init();
+	//lcd_init();
 	receive_buffer_pointer=&receive_buffer; //initialize pointer
 	while(1)
 	{
 		if (flag==4) //if three bytes received
 		{
 			flag=1;
-			switch (receive_buffer[1])
+			switch (receive_buffer[2])
 			{
-				case '1':if (receive_buffer[0]=='0'){
-					DDRJ&=receive_buffer[2]-48;}
-					else if (receive_buffer[0]=='1')
-					{
-						DDRJ|=receive_buffer[2]-48;}
-						lcd_wr_char(receive_buffer[2]); //to check data received
+				case 0x01:set_bits_macro(port[(int)receive_buffer[1]],receive_buffer[0]);
 					break;
-				case '2':if (receive_buffer[0]=='0'){
-				PORTJ&=receive_buffer[2]-48;}
-				else if (receive_buffer[0]=='1')
-				{
-				PORTJ|=receive_buffer[2]-48;}
-				lcd_wr_char(receive_buffer[2]); //to check data received
-				break;
+				case 0x00:clear_bits_macro(port[(int)receive_buffer[1]],receive_buffer[0]);
 					break;
 				default:break;
 			}
 			receive_buffer_pointer=&receive_buffer[0]; //reinitialize pointer
 		}
+		
+		
 
-	}
+		}	
 }

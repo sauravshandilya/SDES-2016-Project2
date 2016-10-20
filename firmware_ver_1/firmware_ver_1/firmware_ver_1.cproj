@@ -64,10 +64,13 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CFile1.c">
+    <Compile Include="firmware.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="firmware.h">
+    <Compile Include="IncFile1.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
