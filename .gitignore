@@ -1,0 +1,9 @@
+*.pyc
+*.pdf
+*.hex
+*.aux
+*.out
+*.nav
+*.log
+*.toc
+Debug/
