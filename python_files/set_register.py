@@ -1,5 +1,5 @@
 #from serial_connection import *
-import serial_connection as sc
+#import serial_connection as sc
 import time
 global value
 global register_name
@@ -47,23 +47,23 @@ def config_register(register_name,pin_name,flag):
     send_data_buffer.append (chr(register_name))
     send_data_buffer.append (chr(flag))
 
-    for i in range (len(send_data_buffer)):
-        sc.port.write(send_data_buffer[i])
+    #for i in range (len(send_data_buffer)):
+        #sc.port.write(send_data_buffer[i])
     
-    # print send_data_buffer
+    print send_data_buffer
 
     return send_data_buffer
 
     
 if __name__ == "__main__":
-     sc.serial_open()
+     #sc.serial_open()
      config_register(DDRJ,PIN0|PIN1|PIN2|PIN3|PIN4|PIN5|PIN6|PIN7, set_pins)
      config_register(DDRC,PIN3,set_pins)
      for x in range(0,5):   
-         config_register(PORTJ,PIN0|PIN1|PIN2,set_pins)
+         config_register(PORTJ,PIN0|PIN1|PIN2|PIN5,set_pins)
          config_register(PORTC,PIN3,set_pins)
          time.sleep(1)
          config_register(PORTJ,PIN0|PIN1|PIN2,reset_pins)
          config_register(PORTC,PIN3,reset_pins)
          time.sleep(1)
-sc.serial_close()
+#sc.serial_close()
