@@ -1,9 +1,22 @@
+#python files
 *.pyc
-*.pdf
+*.save
+
+# C files
 *.hex
+*.atsln
+*.atsuo
+*.cproj
+Debug/
+
+# latex files
 *.aux
 *.out
 *.nav
 *.log
 *.toc
-Debug/
+*.pdf
+*.snm
+*.gz
+*.bbl
+*.blg
