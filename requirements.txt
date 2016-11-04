@@ -1,1 +1,1 @@
-pySeria 2.7
+pySerial 2.7
