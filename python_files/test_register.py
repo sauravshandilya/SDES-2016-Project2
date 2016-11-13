@@ -12,8 +12,8 @@ class Testconfigreg(unittest.TestCase):
     def test_config_data_buffer_value_for_pin(self):
         ''' pin numbers going from 0 to 7'''
         for i in range(0, 8):
-            self.assertEqual(configreg('DDRJ', Pins=[i],
-                             set_pins=True), ['\n', chr(2**i), '\x01'])
+            self.assertEqual(configreg('DDRA', Pins=[i],
+                             set_pins=True), ['\x0b', chr(2**i), '\x01'])
 
     def test_config_data_buffer_value_for_pincombinations(self):
         '''different combinations of pin numbers'''
@@ -22,9 +22,9 @@ class Testconfigreg(unittest.TestCase):
         for i in range(0, 8):
             pin_numbers.append(i)
             pin_value = pin_value + 2**i
-            self.assertEqual(configreg('DDRJ', Pins=pin_numbers,
+            self.assertEqual(configreg('DDRA', Pins=pin_numbers,
                              set_pins=True),
-                             ['\n', chr(pin_value), '\x01'])
+                             ['\x0b', chr(pin_value), '\x01'])
 
     def test_config_buffer_value_for_ports(self):
         '''for Ports A-L'''
@@ -33,7 +33,7 @@ class Testconfigreg(unittest.TestCase):
         pin_numbers = [3]
         for j in valid_port_names:
             port_name = 'DDR' + j
-            buffer_value_port = (chr(ord(port_name[3])-64))
+            buffer_value_port = (chr(ord(port_name[3])-54))
             self.assertEqual(configreg(port_name, Pins=pin_numbers,
                              set_pins=True),
                              [buffer_value_port, chr(pin_value), '\x01'])

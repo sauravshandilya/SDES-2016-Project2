@@ -25,7 +25,7 @@ def configreg(Registername, Pins=[], set_pins=None):
     # raises exception for invalid pin numbers#
     if Registername[0] == 'D':
         check_for_valid_pin_port(Registername[3], pin_value)
-        k = (chr(ord(Registername[3])-64))
+        k = (chr(ord(Registername[3])-54))
     elif Registername[0] == 'P':
         check_for_valid_pin_port(Registername[4], pin_value)
         k = (chr(ord(Registername[4])-65))
@@ -36,4 +36,4 @@ def configreg(Registername, Pins=[], set_pins=None):
     print send_data_buffer
     return send_data_buffer
 
-configreg('DDRJ',Pins=[1,2],set_pins=True)
+configreg('PortB',Pins=[1,2,3],set_pins=False)
