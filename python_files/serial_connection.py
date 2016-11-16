@@ -9,7 +9,7 @@ Python Version: 2.7
 ----------------------------------
 '''
 
-#***********************Library Import Starts*********************
+#***********************Library Import Starts****************clea*****
 import serial
 import time 
 import glob		# Glob module finds all the pathnames matching a specified pattern. It is used for detecting serial ports in use
@@ -95,7 +95,7 @@ def serial_open():
 	Function: Search of all serially connected devices. List all devices recognized as ttyUSB* (for Linux)
 
 	'''
-	port_detect = glob.glob("/dev/ttyUSB*") # stores all /dev/ttyUSB* into a list port_detect
+	port_detect = glob.glob("/dev/tty1") # stores all /dev/ttyUSB* into a list port_detect
 	
 	try:
 		serial_port_connection(port_detect)
