@@ -1,8 +1,14 @@
 language: python
+
 python:
- - "2.7"
+  - "2.7"
+
+before_install:
+  - pip install coveralls
+  - pip install nose
+
 script: python travis_ci_test_files/test_myfucns.py
 
-# branches:
-#  only:
-#   - Parinch
+after_success:
+  - coveralls
+
