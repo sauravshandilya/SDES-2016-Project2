@@ -26,7 +26,7 @@ global port_detect
 
 
 #**********************Communication/Serial Port Detection Starts*********************
-def serial_port_connection(port_detect):
+def serial_port_connection(port_detect,baudrate,parity):
 	'''serial_port_connection(port_detect)
 
 	Function: Multiple serial devices may be connected to system. 
@@ -61,8 +61,8 @@ def serial_port_connection(port_detect):
 #	Baud Rate: 9600
 #	'''
 	    if (len(port_detect) == 1):
-        	port = serial.Serial(port_detect[0],baudrate=9600)
-        	print "connected to: ", port_detect[0]
+        	port = serial.Serial(port_detect[0],baudrate=baudrate,parity=parity)
+        	print "connected to: ", port_detect[0],"Baud rate = ",baudrate, " Parity = ",parity
 	#----------------- connect to PORT if only one port is detected - END ----------------------
 	#
 	#"""
@@ -81,29 +81,29 @@ def serial_port_connection(port_detect):
 		            y = int(raw_input("Enter your choice of connection: "))
 	#---------------------- Ask for user i/p if more then one port is detected - END -------------------
 			
-			port = serial.Serial(port_detect[y],baudrate=9600)		# make connection to user connected serial port
-			print "connected to: ", port_detect[y]					# inform user which port device is connected
-	return
+			port = serial.Serial(port_detect[0],baudrate=baudrate,parity=parity)		# make connection to user connected serial port
+			print "connected to: ", port_detect[y],"Baud rate = ",baudrate, " Parity = ",parity					# inform user which port device is connected
+	return port
 
 #--------------------------------Communication/Serial Port Detection Ends--------------------------
 
 
 #**********************Open Communication/Serial Port Starts*********************	
-def serial_open():	
+def serial_open(baudrate,parity):	
 	'''serial_open
 
 	Function: Search of all serially connected devices. List all devices recognized as ttyUSB* (for Linux)
 
 	'''
-	port_detect = glob.glob("/dev/tty1") # stores all /dev/ttyUSB* into a list port_detect
+	port_detect = glob.glob("/dev/ttyUSB*") # stores all /dev/ttyUSB* into a list port_detect
 	
 	try:
-		serial_port_connection(port_detect)
+		serial_port_connection(port_detect,baudrate,parity)
 				
 		if port.isOpen() == True:
 			print "Port is open"
 		else:
-			serial_port_connection()
+			serial_port_connection(port_detect,baudrate,parity)
 				
 	except:
 		print "No USB port detected....check connection"
