@@ -31,8 +31,8 @@ class Testconfigreg(unittest.TestCase):
       self.port.close()
       
     def test_configreg_raises_exceptions(self):
-      '''checking whether exception is raised for invalid
-      port or pin name'''
+        '''checking whether exception is raised for invalid
+        port or pin name'''
         self.assertRaises(ValueError, Test_object.config_register,
                           'DDRJ', Pins=[1, 2, 8], set_pins=True)
         self.assertRaises(ValueError, Test_object.config_register,
