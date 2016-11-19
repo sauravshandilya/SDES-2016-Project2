@@ -12,7 +12,7 @@ Python Version: 2.7
 #***********************Library Import Starts****************clea*****
 import serial
 import time 
-import glob		# Glob module finds all the pathnames matching a specified pattern. It is used for detecting serial ports in use
+from glob import glob     # Glob module finds all the pathnames matching a specified pattern. It is used for detecting serial ports in use
 import sys     # This module provides access to some variables used or maintained by the interpreter. It is used to exit from program when exception occur
 
 #--------------------Library Import Ends--------------------------
@@ -26,7 +26,7 @@ global port_detect
 
 
 #**********************Communication/Serial Port Detection Starts*********************
-def serial_port_connection(port_detect):
+def serial_port_connection(port_detect,baudrate):
 	'''serial_port_connection(port_detect)
 
 	Function: Multiple serial devices may be connected to system. 
@@ -38,81 +38,39 @@ def serial_port_connection(port_detect):
 	'''
 
 	global port 
-	
-	print len(port_detect),"Ports detected" # print number of ports detected
-	
-	#**************** print all detected ports - STARTS ******************
-	'''
-	List all com ports detected - useful if multiple serial devices are connected
-	'''
-	if (len(port_detect) != 0):
-	    print "Port(s) detected is/are:"
-	    for i in range (0,len(port_detect)):
-	        print port_detect[i]
-	    print "connected to: ", port_detect[0]
 	   
+	port = serial.Serial(port_detect[0],baudrate)
+	print "connected to: ", port_detect[0],"Baud rate = ",baudrate
 	
-	#---------------- print all detected ports - END ----------------------
-	
-	#***************** connect to PORT if only one port is detected - STARTS *******************
-#	'''
-#	Make connection to com port if only one port is detected. If multiple com ports are detected ask user of selection
-#
-#	Baud Rate: 9600
-#	'''
-	    if (len(port_detect) == 1):
-        	port = serial.Serial(port_detect[0],baudrate=9600)
-        	print "connected to: ", port_detect[0]
-	#----------------- connect to PORT if only one port is detected - END ----------------------
-	#
-	#"""
-	#If multiple com ports are detected ask user of selection.
-	#"""
-	#********************** Ask for user i/p if more then one port is detected - STARTS ***************
-	    else:
-	        for i in range(0,len(port_detect)):
-		    print "Enter",i,"to connect to:",port_detect[i]
-		    y = int(raw_input("Enter your choice of connection: "))
-		    
-		    while y >= len(port_detect):
-		        print "Invalid choice"						# if user select invalid port
-		        for i in range(0,len(port_detect)):
-		            print "Enter",i,"to connect to:",port_detect[i]
-		            y = int(raw_input("Enter your choice of connection: "))
-	#---------------------- Ask for user i/p if more then one port is detected - END -------------------
-			
-			port = serial.Serial(port_detect[y],baudrate=9600)		# make connection to user connected serial port
-			print "connected to: ", port_detect[y]					# inform user which port device is connected
-	return
+	return port
 
 #--------------------------------Communication/Serial Port Detection Ends--------------------------
 
 
-#**********************Open Communication/Serial Port Starts*********************	
-def serial_open():	
+#**********************Open Communication/Serial Port Starts*********************   
+def serial_open(baudrate):   
 	'''serial_open
 
 	Function: Search of all serially connected devices. List all devices recognized as ttyUSB* (for Linux)
 
 	'''
-	port_detect = glob.glob("/dev/tty1") # stores all /dev/ttyUSB* into a list port_detect
+	port_detect = glob("/dev/ttyUSB*") # stores all /dev/ttyUSB* into a list port_detect
 	
 	try:
-		serial_port_connection(port_detect)
+		port = serial_port_connection(port_detect,baudrate)
 				
 		if port.isOpen() == True:
 			print "Port is open"
 		else:
-			serial_port_connection()
+				port = serial_port_connection(port_detect,baudrate)
 				
 	except:
 		print "No USB port detected....check connection"
-		sys.exit(0)		# stop program execution when exception occur
+		sys.exit(0)     # stop program execution when exception occur
 		
 #-------------------Open Communication/Serial Port Starts-----------------------
 
-
-#**********************Close Communication/Serial Port Starts*********************	
+#**********************Close Communication/Serial Port Starts*********************  
 def serial_close():
 	"""
 	Description: Close serial port
@@ -122,3 +80,7 @@ def serial_close():
 	"""
 	port.close()
 #**********************Close Communication/Serial Port Ends*********************
+
+
+
+
