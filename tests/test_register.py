@@ -1,12 +1,33 @@
+import sys
+import os
 import unittest
 import mock
-from serial_connection import serial_port_connection 
-#from register import configreg
+
+sys.path.append('../source/')
+##module_path = os.path.dirname(os.path.curdir + os.path.sep)
+#sys.path.insert(1, os.path.abspath(module_path))
+
+
+from serial_connection import serial_port_connection
 from roboapi import Atmega,Buzzer
 
-Test_object=Atmega(9600,None)
+Test_object=Atmega(9600)
+ 
 
 class Testconfigreg(unittest.TestCase):
+    
+    @mock.patch('serial_connection.serial.Serial')
+    @mock.patch('serial_connection.glob')
+    def setUp(self,mock_glob,mock_serial_port):
+      self.portdetect=['ttyUSB0','ttyUSB1']
+      self.baudrate=9600
+      mock_glob('ttyUSB0')  
+      self.port=serial_port_connection(self.portdetect,baudrate=self.baudrate)
+      
+
+    def tearDown(self,mock_glob,mock_serial_port):
+      self.port.close()
+      
     def test_configreg_raises_exceptions(self):
         self.assertRaises(ValueError, Test_object.config_register,
                           'DDRJ', Pins=[1, 2, 8], set_pins=True)
@@ -61,47 +82,7 @@ class Testbuzzer(unittest.TestCase):
       mock_config_register.assert_has_calls(expected)
       
       
-class Serialtest(unittest.TestCase):
-  
-  
-  @mock.patch('serial_connection.serial.Serial')
-  @mock.patch('serial_connection.glob')
-  def Test_serial_port_connection(self,mock_glob,mock_serial_port):
-    self.portdetect=['ttyUSB0','ttyUSB1']
-    self.baudrate=9600
-    mock_glob('ttyUSB0')
-    serial_port_connection(self.portdetect,baudrate=self.baudrate)
-    expected=()
-    mock_serial_port.assert_called_with(self.portdetect[0],self.baudrate)
-    
 
-  @mock.patch('serial_connection.serial.sys.exit')
-  @mock.patch('serial_connection.glob')
-  @mock.patch('serial_connection.serial.Serial')
-  def Test_serial_open(self,mock_serial_port,mock_serial_port_path,mock_sys_call):
-    mock_serial_port_path('ttyUSB0')
-    self.portdetect=['ttyUSB0','ttyUSB1']
-    self.baudrate=9600
-    mock_serial_port_path('ttyUSB0')
-    serial_port_connection(self.portdetect,baudrate=self.baudrate)
-    mock_sys_call.assert_not_called()
-  
-  @mock.patch('serial_connection.glob')
-  @mock.patch('serial_connection.serial.Serial')
-  def Test_serial_write(self,mock_serial_port,mock_glob):
-    self.portdetect=['ttyUSB0','ttyUSB1']
-    self.baudrate=9600
-    mock_glob('ttyUSB0')
-    port=serial_port_connection(self.portdetect,baudrate=self.baudrate)
-    Test_object.serial_write('p')
-    mock_serial_port.return_value.write.assert_called_once_with('p')
-    data_buffer=[]
-    data_buffer=Test_object.config_register('DDRA', Pins=[3],
-                             set_pins=True)
-    expected = [mock.call(x) for x in data_buffer]
-    port.write.assert_has_calls(expected)
-    
-  
 
     
     
