@@ -1,6 +1,4 @@
 import serial_connection as sc
-#from register import configreg
-# from abc import ABCMeta, abstractmethod
 import time
 
 class Atmega(object):
@@ -79,7 +77,7 @@ class Buzzer(Atmega):
 
 class Motion(Atmega):
 
-  def __init__(self,baudrate,parity):
+  def __init__(self,baudrate):
     super(Motion,self).__init__(baudrate)
     self.datadirection_register_enable='DDRL'
     self.port_register_enable='PortL'
