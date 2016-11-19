@@ -4,7 +4,7 @@ import time
 class Atmega(object):
   def __init__(self,baudrate=9600):
     self.baudrate=baudrate
-    #self.port_check=sc.serial_open(self.baudrate,self.parity)
+    #self.port_check=sc.serial_open(self.baudrate)
 	
   @classmethod
   def check_for_valid_pin_port(cls,portname, pin_value):
@@ -53,7 +53,7 @@ class Atmega(object):
   
 class Buzzer(Atmega):
   
-  def __init__(self,baudrate,parity):
+  def __init__(self,baudrate):
     super(Buzzer,self).__init__(baudrate)
     self.datadirection_register='DDRC'
     self.port_register='PortC'
@@ -72,12 +72,12 @@ class Buzzer(Atmega):
 
 
 #if __name__ == '__main__':
-  #r1 = Atmega(9600,"PARITY_EVEN")
+  #r1 = Atmega(9600)
   #r1.config_register("DDRJ",Pins=[0,1,2,3,4,5,6,7],set_pins=True)
   #time.sleep(0.2)
   #r1.config_register("PORTJ",Pins=[1,2,3,4,5,6,7],set_pins=True)
   
   #time.sleep(0.5)
-  #buzz = Buzzer(9600,"none")
+  #buzz = Buzzer(9600)
   #time.sleep(0.2)
   #buzz.on(2)
