@@ -4,7 +4,8 @@ import time
 class Atmega(object):
   def __init__(self,baudrate=9600):
     self.baudrate=baudrate
-    self.port_check=sc.serial_open(self.baudrate)
+
+    #self.port_check=sc.serial_open(self.baudrate)
 	
   @classmethod
   def check_for_valid_pin_port(cls,portname, pin_value):
@@ -59,12 +60,8 @@ class Buzzer(Atmega):
     self.port_register='PortC'
     self.pin=[3]
     self.set_pin=True
-
-    # Set Direction Register -- DDRC
     Atmega.config_register(self.datadirection_register,self.pin,True)
-    
-    # Turn Buzzer Off - on initialization
-    Atmega.config_register(self.datadirection_register,self.pin,False)
+
 
   def on(self,on_time=0):
     Atmega.config_register(self.port_register,self.pin,True)
@@ -73,6 +70,7 @@ class Buzzer(Atmega):
       Atmega.config_register(self.port_register,self.pin,False)
 
   def off(self):
+
     Atmega.config_register(self.datadirection_register,self.pin,False)
 
 class Motion(Atmega):
@@ -153,3 +151,18 @@ if __name__ == '__main__':
   buzz = Buzzer(9600)
   #time.sleep(0.2)
   buzz.on(2)
+
+    Atmega.config_register(self.port_register,self.pin,False)
+
+
+#if __name__ == '__main__':
+  #r1 = Atmega(9600)
+  #r1.config_register("DDRJ",Pins=[0,1,2,3,4,5,6,7],set_pins=True)
+  #time.sleep(0.2)
+  #r1.config_register("PORTJ",Pins=[1,2,3,4,5,6,7],set_pins=True)
+  
+  #time.sleep(0.5)
+  #buzz = Buzzer(9600)
+  #time.sleep(0.2)
+  #buzz.on(2)
+

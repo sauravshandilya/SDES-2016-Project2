@@ -12,7 +12,7 @@ Python Version: 2.7
 #***********************Library Import Starts****************clea*****
 import serial
 import time 
-from glob import glob		# Glob module finds all the pathnames matching a specified pattern. It is used for detecting serial ports in use
+from glob import glob     # Glob module finds all the pathnames matching a specified pattern. It is used for detecting serial ports in use
 import sys     # This module provides access to some variables used or maintained by the interpreter. It is used to exit from program when exception occur
 
 #--------------------Library Import Ends--------------------------
@@ -37,18 +37,18 @@ def serial_port_connection(port_detect,baudrate):
 	port_detect: comes from another function serial_open() which detects all serial devices connected to system
 	'''
 
-	global port
- 
+	global port 
+	   
 	port = serial.Serial(port_detect[0],baudrate)
 	print "connected to: ", port_detect[0],"Baud rate = ",baudrate
-
+	
 	return port
 
 #--------------------------------Communication/Serial Port Detection Ends--------------------------
 
 
-#**********************Open Communication/Serial Port Starts*********************	
-def serial_open(baudrate):	
+#**********************Open Communication/Serial Port Starts*********************   
+def serial_open(baudrate):   
 	'''serial_open
 
 	Function: Search of all serially connected devices. List all devices recognized as ttyUSB* (for Linux)
@@ -57,20 +57,20 @@ def serial_open(baudrate):
 	port_detect = glob("/dev/ttyUSB*") # stores all /dev/ttyUSB* into a list port_detect
 	
 	try:
-		serial_port_connection(port_detect,baudrate)
+		port = serial_port_connection(port_detect,baudrate)
 				
 		if port.isOpen() == True:
 			print "Port is open"
 		else:
-			serial_port_connection(port_detect,baudrate)
+				port = serial_port_connection(port_detect,baudrate)
 				
 	except:
 		print "No USB port detected....check connection"
-		sys.exit(0)		# stop program execution when exception occur
+		sys.exit(0)     # stop program execution when exception occur
 		
 #-------------------Open Communication/Serial Port Starts-----------------------
 
-#**********************Close Communication/Serial Port Starts*********************	
+#**********************Close Communication/Serial Port Starts*********************  
 def serial_close():
 	"""
 	Description: Close serial port
@@ -80,3 +80,7 @@ def serial_close():
 	"""
 	port.close()
 #**********************Close Communication/Serial Port Ends*********************
+
+
+
+
