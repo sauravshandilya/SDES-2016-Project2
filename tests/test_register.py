@@ -73,6 +73,7 @@ class Testbuzzer(unittest.TestCase):
   
     @mock.patch('roboapi.Atmega.config_register')
     def Test_buzzer(self,mock_config_register):
+      '''checking buzzer class'''
       x=Buzzer(9600,None)
       x.on()
       Registername='PortC'
