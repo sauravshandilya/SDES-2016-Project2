@@ -4,10 +4,12 @@ python:
   - "2.7"
 
 before_install:
-  - pip install coveralls
-  - pip install nose
-
-script: python travis_ci_test_files/test_myfucns.py
+  - pip install coverage
+  - pip install python-coveralls
+  - pip install nosetests
+  - pip install mock
+  
+script: python tests/test_register.py
 
 after_success:
   - coveralls
