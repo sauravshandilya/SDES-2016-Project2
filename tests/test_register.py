@@ -19,16 +19,20 @@ class Testconfigreg(unittest.TestCase):
     @mock.patch('serial_connection.serial.Serial')
     @mock.patch('serial_connection.glob')
     def setUp(self,mock_glob,mock_serial_port):
+      '''setting up a dummy serial port object '''
       self.portdetect=['ttyUSB0','ttyUSB1']
       self.baudrate=9600
       mock_glob('ttyUSB0')  
       self.port=serial_port_connection(self.portdetect,baudrate=self.baudrate)
       
 
-    def tearDown(self,mock_glob,mock_serial_port):
+    def tearDown(self):
+      '''closing the dummy serial port'''
       self.port.close()
       
     def test_configreg_raises_exceptions(self):
+        '''checking whether exception is raised for invalid
+        port or pin name'''
         self.assertRaises(ValueError, Test_object.config_register,
                           'DDRJ', Pins=[1, 2, 8], set_pins=True)
         self.assertRaises(ValueError, Test_object.config_register,
@@ -66,8 +70,10 @@ class Testconfigreg(unittest.TestCase):
     
     
 class Testbuzzer(unittest.TestCase):
+  
     @mock.patch('roboapi.Atmega.config_register')
     def Test_buzzer(self,mock_config_register):
+      '''checking buzzer class'''
       x=Buzzer(9600,None)
       x.on()
       Registername='PortC'
