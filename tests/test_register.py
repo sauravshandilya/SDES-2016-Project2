@@ -4,8 +4,6 @@ import unittest
 import mock
 
 sys.path.append('../source/')
-##module_path = os.path.dirname(os.path.curdir + os.path.sep)
-#sys.path.insert(1, os.path.abspath(module_path))
 
 
 from serial_connection import serial_port_connection
