@@ -1,6 +1,12 @@
 ===============================================
 roboapi - Python API for mobile robot control
 ===============================================
+.. image:: https://travis-ci.org/travis-ci/travis-web.svg?branch=master
+    :target: https://travis-ci.org/travis-ci/travis-web
+
+.. image:: https://coveralls.io/repos/github/sauravshandilya/SDES-2016-Project2/badge.svg
+:target: https://coveralls.io/github/sauravshandilya/SDES-2016-Project2
+
 
 Write a Python API for controlling a mobile robot.
 
