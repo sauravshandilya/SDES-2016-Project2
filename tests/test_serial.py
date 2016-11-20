@@ -4,10 +4,11 @@ import sys
 import os
 
 
+module_path = os.path.dirname(os.path.curdir + "." + os.path.sep)
+sys.path.insert(0, os.path.abspath(module_path+"/source"))
 
-sys.path.append('../source/')
 
-from serial_connection import serial_port_connection 
+from serial_connection import serial_port_connection,serial_open
 from roboapi import Atmega,Buzzer
 
 
@@ -44,7 +45,7 @@ class Serialtest(unittest.TestCase):
   def Test_serial_write(self,mock_serial_port,mock_glob):
     self.portdetect=['ttyUSB0','ttyUSB1']
     self.baudrate=9600
-    mock_glob('ttyUSB0')
+    #mock_glob('ttyUSB0')
     port=serial_port_connection(self.portdetect,baudrate=self.baudrate)
     Test_object.serial_write('p')
     mock_serial_port.return_value.write.assert_called_once_with('p')
@@ -54,8 +55,14 @@ class Serialtest(unittest.TestCase):
     expected = [mock.call(x) for x in data_buffer]
     port.write.assert_has_calls(expected)
     
-  
-
+  @mock.patch('serial_connection.sys')
+  @mock.patch('serial_connection.serial.Serial.isOpen')
+  def Test_serial_close(self,mock_serial_port,mock_system_call):
+    self.portdetect=['ttyUSB0','ttyUSB1']
+    self.baudrate=9600
+    serial_open(self.baudrate)
+    mock_system_call.exit.assert_called()
+    
     
     
     

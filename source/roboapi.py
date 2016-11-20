@@ -75,6 +75,8 @@ class Buzzer(Atmega):
     Atmega.config_register(self.port_register,self.pin,False)
 
 
+
+
 #if __name__ == '__main__':
   #r1 = Atmega(9600,"PARITY_EVEN")
   #r1.config_register("DDRJ",Pins=[0,1,2,3,4,5,6,7],set_pins=True)
