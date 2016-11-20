@@ -33,7 +33,7 @@ class Testconfigreg(unittest.TestCase):
         self.port.close()
 
     def test_configreg_raises_exceptions(self):
-        """checking whether exception is raised for invalid
+        """checking exception raised for invalid
         port name or pin Number
         """
         self.assertRaises(ValueError, Test_object.config_register,
@@ -52,8 +52,8 @@ class Testconfigreg(unittest.TestCase):
                              set_pins=True), ['\x0b', chr(2**i), '\x01'])
 
     def test_config_data_buffer_value_for_pincombinations(self):
-        """ output data buffer values for
-        different combinations of pin numbers
+        """
+        different combination of pin numbers
         """
         pin_numbers = []
         pin_value = 0
@@ -75,7 +75,7 @@ class Testconfigreg(unittest.TestCase):
             port_name = 'DDR' + j
             buffer_value_port = (chr(ord(port_name[3])-54))
             self.assertEqual(Test_object.config_register(port_name,
-                             Pins=pin_numbers,set_pins=True),
+                             Pins=pin_numbers, set_pins=True),
                              [buffer_value_port, chr(pin_value), '\x01'])
 
 
@@ -85,7 +85,7 @@ class Testbuzzer(unittest.TestCase):
     """
     @mock.patch('roboapi.Atmega.config_register')
     def Test_buzzer(self, mock_config_register):
-        """checking for correct initialization
+        """checking for correct initialization of PortC
         """
         # object of class Buzzer
         x = Buzzer(9600)
@@ -93,82 +93,96 @@ class Testbuzzer(unittest.TestCase):
         Registername = 'PortC'
         pins = [3]
         set_pins = True
-        expected = [mock.call('DDRC', [3], True), mock.call('PortC', [3], True)]
+        expected = [mock.call('DDRC', [3], True),
+                    mock.call('PortC', [3], True)]
         mock_config_register.assert_has_calls(expected)
         x.off()
         expected = [mock.call('PortC', [3], False)]
-        # checking whether config_register is called correct arguments
+        # checking whether config_register is called with correct arguments
         mock_config_register.assert_has_calls(expected)
-
-
 
 
 class Testmotion(unittest.TestCase):
 
-  @mock.patch('roboapi.Atmega.config_register')
-    def Test_initialize(self,mock_config_register):
+    @mock.patch('roboapi.Atmega.config_register')
+    def Test_initialize(self, mock_config_register):
         '''tests for robot motion'''
-        x=Motion(9600)
-        expected=[mock.call('DDRL',[3,4],True),mock.call('PortL',[3,4],True),
-        mock.call('DDRA',[0,1,2,3],True),mock.call('PortA',[0,1,2,3],False)]
+        #object of class Motion
+        x = Motion(9600)
+        """
+        checking whether config_register 
+        has the correct calls
+        """
+        expected = [mock.call('DDRL', [3, 4], True),
+                    mock.call('PortL', [3, 4], True),
+                    mock.call('DDRA', [0, 1, 2, 3], True),
+                    mock.call('PortA', [0, 1, 2, 3], False)]
         mock_config_register.assert_has_calls(expected)
-
 
     @mock.patch('roboapi.Atmega.config_register')
-    def Test_motion(self,mock_config_register):
+    def Test_motion(self, mock_config_register):
         '''tests for different motion'''
-        x=Motion(9600)
-        expected=[mock.call('DDRL',[3,4],True),mock.call('PortL',[3,4],True),
-        mock.call('DDRA',[0,1,2,3],True),mock.call('PortA',[0,1,2,3],False)]
+        x = Motion(9600)
+        expected = [mock.call('DDRL', [3, 4], True),
+                    mock.call('PortL', [3, 4], True),
+                    mock.call('DDRA', [0, 1, 2, 3], True),
+                    mock.call('PortA', [0, 1, 2, 3], False)]
         mock_config_register.assert_has_calls(expected)
-
+        
+        # test for forward motion
         x.forward()
-        expected=[mock.call('PortA',[0],False),mock.call('PortA',[1],True),
-        mock.call('PortA',[2],True),mock.call('PortA',[3],False)]
+        expected = [mock.call('PortA', [0], False),
+                    mock.call('PortA', [1], True),
+                    mock.call('PortA', [2], True),
+                    mock.call('PortA', [3], False)]
         mock_config_register.assert_has_calls(expected)
-
+        
+        # test for backward motion
         x.back()
-        expected=[mock.call('PortA',[0],True),mock.call('PortA',[1],False),
-        mock.call('PortA',[2],False),mock.call('PortA',[3],True)]
+        expected = [mock.call('PortA', [0], True),
+                    mock.call('PortA', [1], False),
+                    mock.call('PortA', [2], False),
+                    mock.call('PortA', [3], True)]
         mock_config_register.assert_has_calls(expected)
-
+        
+        # test for left direction
         x.left()
-        expected=[mock.call('PortA',[0],False),mock.call('PortA',[1],True),
-        mock.call('PortA',[2],False),mock.call('PortA',[3],True)]
+        expected = [mock.call('PortA', [0], False),
+                    mock.call('PortA', [1], True),
+                    mock.call('PortA', [2], False),
+                    mock.call('PortA', [3], True)]
         mock_config_register.assert_has_calls(expected)
-
+        
+        # test for right direction
         x.right()
-        expected=[mock.call('PortA',[0],True),mock.call('PortA',[1],False),
-        mock.call('PortA',[2],True),mock.call('PortA',[3],False)]
+        expected = [mock.call('PortA', [0], True),
+                    mock.call('PortA', [1], False),
+                    mock.call('PortA', [2], True),
+                    mock.call('PortA', [3], False)]
         mock_config_register.assert_has_calls(expected)
-
-
+        
+        # test for soft left
         x.soft_left()
-        expected=[mock.call('PortA',[0],False),mock.call('PortA',[1],False),
-        mock.call('PortA',[2],True),mock.call('PortA',[3],False)]
+        expected = [mock.call('PortA', [0], False),
+                    mock.call('PortA', [1], False),
+                    mock.call('PortA', [2], True),
+                    mock.call('PortA', [3], False)]
         mock_config_register.assert_has_calls(expected)
-
+        
+        # test for soft right
         x.soft_right()
-        expected=[mock.call('PortA',[0],False),mock.call('PortA',[1],True),
-        mock.call('PortA',[2],False),mock.call('PortA',[3],False)]
+        expected = [mock.call('PortA', [0], False),
+                    mock.call('PortA', [1], True),
+                    mock.call('PortA', [2], False),
+                    mock.call('PortA', [3], False)]
         mock_config_register.assert_has_calls(expected)
-
+        
+        # test for stop
         x.stop()
-        expected=[mock.call('PortA',[0],False),mock.call('PortA',[1],False),
-        mock.call('PortA',[2],False),mock.call('PortA',[3],False)]
+        expected = [mock.call('PortA', [0], False),
+                    mock.call('PortA', [1], False),
+                    mock.call('PortA', [2], False),
+                    mock.call('PortA', [3], False)]
         mock_config_register.assert_has_calls(expected)
 
 
-def suite():
-
-    suite = unittest.TestSuite()
-
-    suite.addTest(unittest.makeSuite(Testconfigreg))
-    suite.addTest(unittest.makeSuite(Testbuzzer))
-    return suite
-
-
-if __name__ == '__main__':
-    unittest.main()
-    suiteFew = unittest.TestSuite()
-    unittest.TextTestRunner(verbosity=2).run(suite())

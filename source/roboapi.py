@@ -10,29 +10,15 @@ class Atmega(object):
     """ A Parent class for I/O port access """
     def __init__(self, baudrate=9600):
         """ Class Constructor
+
         Parameter:
-            baudrate for serial communication.
-            9600 by default.
+
+            baudrate: named argument
+              baudrate for serial communication.
+              9600 by default.
         """
         self.baudrate = baudrate
         # self.port_check=sc.serial_open(self.baudrate)
-
-    @classmethod
-    def check_for_valid_pin_port(cls, portname, pin_value):
-        """ Check for valid pin numbers and port numbers
-            raises Value Error if invalid
-        Parameters:
-            portname
-              Port Name given by the user
-            pin_value
-              binary wieghted decimal representation
-              of the pin numbers given by the user
-        """
-        valid_port_names = [chr(i) for i in range(65, 77) if chr(i) != 'I']
-        if pin_value > 255:
-            raise ValueError("incorrect pin numbers")
-        if portname not in valid_port_names:
-            raise ValueError("incorrect port name")
 
     @classmethod
     def config_register(cls, Registername, Pins=[], set_pins=None):
@@ -40,19 +26,18 @@ class Atmega(object):
             Sends a serial packet to the controller
             based on the input arguments
         Parameters:
-            Registername
-              Name of the I/O Port
-
-            Pins=[]
-              A comma separated list of I/O pin numbers
-
-            set_pins
-              The corresponding pin numbers set to logic '1'
-              when True
-              set to logic '0' when False
+            1.Registername = str
+                  Name of the I/O Port
+            2.Pins = list
+                  A comma separated list of I/O pin numbers
+            3.set_pins = Named Argument
+                  The corresponding pin numbers set to logic '1'
+                  when True; set to logic '0' when False
         Examples:
-              >> config_register('PortJ', Pins=[1, 2, 4], set_pins=True)
-              >> config_register('DDRA', Pins=[0,5,3,5], set_pins=False)
+            Port J access
+              >>> config_register('PortJ', Pins=[1, 2, 4], set_pins=True)
+            Port A access
+              >>> config_register('DDRA', Pins=[0,5,3,5], set_pins=False)
               """
 
         pin_value = 0
@@ -81,6 +66,25 @@ class Atmega(object):
         return cls.send_data_buffer
 
     @classmethod
+    def check_for_valid_pin_port(cls, portname, pin_value):
+        """
+        Check for valid pin numbers and port numbers
+        raises Value Error if invalid
+
+        Parameters:
+            1.portname: str
+                  Port Name given by the user
+            2.pin_value: integer
+                  binary wieghted decimal representation
+                  of the pin numbers given by the user
+        """
+        valid_port_names = [chr(i) for i in range(65, 77) if chr(i) != 'I']
+        if pin_value > 255:
+            raise ValueError("incorrect pin numbers")
+        if portname not in valid_port_names:
+            raise ValueError("incorrect port name")
+
+    @classmethod
     def serial_write(cls, data):
         """ send data on the serial port """
         for i in range(len(data)):
@@ -89,13 +93,14 @@ class Atmega(object):
 
 
 class Buzzer(Atmega):
-    """ Derived class from parent class Atmega
+    """ Derived class from parent class Atmega.
         Provides functions to control Buzzer """
     def __init__(self, baudrate):
         """Class constructor
-        Parameter:
-            baudrate for serial communication
-            9600 by default
+
+         baudrate: named argument
+              baudrate for serial communication.
+              9600 by default.
 
         Buzzer is connected to Port C
         Instance varaibles set accordingly
@@ -114,12 +119,15 @@ class Buzzer(Atmega):
         Atmega.config_register(self.datadirection_register, self.pin, True)
 
     def on(self, on_time=0):
-        """ Turn ON buzzer for the specified time
-        Parameter:
-            on_time = ON time in seconds
+        """ Turn ON buzzer for a specified time
+
+        Parameters:
+            on_time = float
+                ON time in seconds
+
         Examples:
-            >>> on(5) "5" is ON time in seconds
-            >>> on(0.3) "0.3" is ON time in seconds
+            >>> Buzzer.on(5) "5" is ON time in seconds
+            >>> Buzzer.on(0.3) "0.3" is ON time in seconds
         """
         Atmega.config_register(self.port_register, self.pin, True)
         if (on_time != 0):
@@ -129,7 +137,7 @@ class Buzzer(Atmega):
     def off(self):
         """ Turn OFF buzzer
         Example:
-            >>> off()
+            >>> Buzzer.off()
         """
         Atmega.config_register(self.port_register, self.pin, False)
 
@@ -153,7 +161,7 @@ class Motion(Atmega):
 
             datadirection_register = DDRL, DDRA
             port_register_enable = PORTL, PORTA
-            pin_enalbe = [3,4] ,[0,1,2,3]
+            pin_enable = [3,4] ,[0,1,2,3]
 
         """
         super(Motion, self).__init__(baudrate)
@@ -177,13 +185,13 @@ class Motion(Atmega):
     def forward(self):
         """ Take the robot in forward direction
         Example:
-            >>> Motion.forward() 
+            >>> Motion.forward()
         """
-        # Right and left wheels move in forward direction 
-        Atmega.config_register(self.port_register_direction, [0], False)  
-        Atmega.config_register(self.port_register_direction, [1], True)   
-        Atmega.config_register(self.port_register_direction, [2], True)   
-        Atmega.config_register(self.port_register_direction, [3], False)  
+        # Right and left wheels move in forward direction
+        Atmega.config_register(self.port_register_enable[1], [0], False)
+        Atmega.config_register(self.port_register_enable[1], [1], True)
+        Atmega.config_register(self.port_register_enable[1], [2], True)
+        Atmega.config_register(self.port_register_enable[1], [3], False)
 
     def back(self):
         """ Move the robot back
@@ -191,10 +199,10 @@ class Motion(Atmega):
             >>> Motion.back()
         """
         # Left and Right wheels move backwards
-        Atmega.config_register(self.port_register_direction, [0], True)   
-        Atmega.config_register(self.port_register_direction, [1], False)  
-        Atmega.config_register(self.port_register_direction, [2], False)  
-        Atmega.config_register(self.port_register_direction, [3], True)   
+        Atmega.config_register(self.port_register_enable[1], [0], True)
+        Atmega.config_register(self.port_register_enable[1], [1], False)
+        Atmega.config_register(self.port_register_enable[1], [2], False)
+        Atmega.config_register(self.port_register_enable[1], [3], True)
 
     def left(self):
         """ Move the robot left
@@ -202,10 +210,10 @@ class Motion(Atmega):
             >>> Motion.left()
         """
         # Left wheel back and right wheel forward
-        Atmega.config_register(self.port_register_direction, [0], False)  
-        Atmega.config_register(self.port_register_direction, [1], True)   
-        Atmega.config_register(self.port_register_direction, [2], False)  
-        Atmega.config_register(self.port_register_direction, [3], True)   
+        Atmega.config_register(self.port_register_enable[1], [0], False)
+        Atmega.config_register(self.port_register_enable[1], [1], True)
+        Atmega.config_register(self.port_register_enable[1], [2], False)
+        Atmega.config_register(self.port_register_enable[1], [3], True)
 
     def right(self):
         """ Move the robot right
@@ -213,10 +221,10 @@ class Motion(Atmega):
             >>> Motion.right()
         """
         # Right wheel back and left forward
-        Atmega.config_register(self.port_register_direction, [0], True)   
-        Atmega.config_register(self.port_register_direction, [1], False)  
-        Atmega.config_register(self.port_register_direction, [2], True)   
-        Atmega.config_register(self.port_register_direction, [3], False)  
+        Atmega.config_register(self.port_register_enable[1], [0], True)
+        Atmega.config_register(self.port_register_enable[1], [1], False)
+        Atmega.config_register(self.port_register_enable[1], [2], True)
+        Atmega.config_register(self.port_register_enable[1], [3], False)
 
     def soft_left(self):
         """ Small deviation in robot motion towards left
@@ -224,10 +232,10 @@ class Motion(Atmega):
             >>> Motion.soft_left()
         """
         # Left wheek back right wheel stationary
-        Atmega.config_register(self.port_register_direction, [0], False)  
-        Atmega.config_register(self.port_register_direction, [1], False)  
-        Atmega.config_register(self.port_register_direction, [2], True)   
-        Atmega.config_register(self.port_register_direction, [3], False)  
+        Atmega.config_register(self.port_register_enable[1], [0], False)
+        Atmega.config_register(self.port_register_enable[1], [1], False)
+        Atmega.config_register(self.port_register_enable[1], [2], True)
+        Atmega.config_register(self.port_register_enable[1], [3], False)
 
     def soft_right(self):
         """ Small deviation in robot motion towards right
@@ -235,10 +243,10 @@ class Motion(Atmega):
             >>> Motion.soft_left()
         """
         # Right wheel back left wheel stationary
-        Atmega.config_register(self.port_register_direction, [0], False)  
-        Atmega.config_register(self.port_register_direction, [1], True)   
-        Atmega.config_register(self.port_register_direction, [2], False)  
-        Atmega.config_register(self.port_register_direction, [3], False)  
+        Atmega.config_register(self.port_register_enable[1], [0], False)
+        Atmega.config_register(self.port_register_enable[1], [1], True)
+        Atmega.config_register(self.port_register_enable[1], [2], False)
+        Atmega.config_register(self.port_register_enable[1], [3], False)
 
     def stop(self):
         """ Stop the robot
@@ -246,7 +254,7 @@ class Motion(Atmega):
             >>> Motion.stop()
         """
         # Both left and Right wheels stationary
-        Atmega.config_register(self.port_register_direction, [0], False)   
-        Atmega.config_register(self.port_register_direction, [1], False)  
-        Atmega.config_register(self.port_register_direction, [2], False)   
-        Atmega.config_register(self.port_register_direction, [3], False)  
+        Atmega.config_register(self.port_register_enable[1], [0], False)
+        Atmega.config_register(self.port_register_enable[1], [1], False)
+        Atmega.config_register(self.port_register_enable[1], [2], False)
+        Atmega.config_register(self.port_register_enable[1], [3], False)
