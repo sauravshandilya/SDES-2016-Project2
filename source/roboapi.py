@@ -136,6 +136,7 @@ class Buzzer(Atmega):
 
     def off(self):
         """ Turn OFF buzzer
+        
         Example:
             >>> Buzzer.off()
         """
@@ -184,6 +185,7 @@ class Motion(Atmega):
 
     def forward(self):
         """ Take the robot in forward direction
+        
         Example:
             >>> Motion.forward()
         """
@@ -195,6 +197,7 @@ class Motion(Atmega):
 
     def back(self):
         """ Move the robot back
+        
         Example:
             >>> Motion.back()
         """
@@ -206,6 +209,7 @@ class Motion(Atmega):
 
     def left(self):
         """ Move the robot left
+        
         Example:
             >>> Motion.left()
         """
@@ -217,6 +221,7 @@ class Motion(Atmega):
 
     def right(self):
         """ Move the robot right
+        
         Example:
             >>> Motion.right()
         """
@@ -228,6 +233,7 @@ class Motion(Atmega):
 
     def soft_left(self):
         """ Small deviation in robot motion towards left
+        
         Example:
             >>> Motion.soft_left()
         """
@@ -239,6 +245,7 @@ class Motion(Atmega):
 
     def soft_right(self):
         """ Small deviation in robot motion towards right
+        
         Example:
             >>> Motion.soft_left()
         """
@@ -250,6 +257,7 @@ class Motion(Atmega):
 
     def stop(self):
         """ Stop the robot
+        
         Example:
             >>> Motion.stop()
         """
