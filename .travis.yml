@@ -15,7 +15,7 @@ before_install:
 script: 
    - cd source
    - export PYTHONPATH=$PYTHONPATH:$(pwd)
-   - nosetests --with-coverage -v
+   - nosetests -v
 
 after_success:
    - coveralls --rcfile=.coveragerc
