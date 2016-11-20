@@ -2,14 +2,20 @@
 
 omit =  
     */python?.?/*
-         */python?/*
+    */lib-python/?.?/*.py
+    */lib_pypy/_*.py
+    */site-packages/nose/*
     */site-packages/*
+	*/unittest2/*
     *__init__*
     
 [report]
 
-omit =
-   */python?.?/*
-	   */python?/*
-   */site-packages/*
-   *__init__*
+omit =  
+    */python?.?/*
+    */lib-python/?.?/*.py
+    */lib_pypy/_*.py
+    */site-packages/nose/*
+    */site-packages/*
+	*/unittest2/*
+    *__init__*
