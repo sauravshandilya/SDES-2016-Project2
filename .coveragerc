@@ -6,7 +6,9 @@ omit =
     */lib_pypy/_*.py
     */site-packages/nose/*
     */site-packages/*
-	*/unittest2/*
+    */unittest2/*
+    serial/serialposix.py
+    */funcsigs/*
     *__init__*
     
 [report]
