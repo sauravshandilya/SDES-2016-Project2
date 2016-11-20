@@ -169,7 +169,7 @@ class Testmotion(unittest.TestCase):
                     mock.call('PortA', [3], False)]
         mock_config_register.assert_has_calls(expected)
         
-        cov# test for soft right
+        # test for soft right
         x.soft_right()
         expected = [mock.call('PortA', [0], False),
                     mock.call('PortA', [1], True),
