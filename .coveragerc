@@ -8,6 +8,8 @@ omit =
     */unittest2/*
     serial/serialposix.py
     */funcsigs/*
+    */mock/mock.py
+    */funcsigs.py
     *__init__*
     
 [report]
@@ -17,5 +19,9 @@ omit =
     */lib_pypy/_*.py
     */site-packages/nose/*
     */site-packages/*
-	*/unittest2/*
+    */unittest2/*
+    serial/serialposix.py
+    */funcsigs/*
+    */mock/mock.py
+    */funcsigs.py
     *__init__*
