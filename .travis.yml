@@ -6,7 +6,7 @@ python:
 sudo: required
 
 before_install:
-  - python -m pip install pyserial
+  - pip install -r requirements.txt
   - pip install coverage
   - pip install python-coveralls
   - pip install nose
