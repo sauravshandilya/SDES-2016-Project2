@@ -9,8 +9,8 @@ before_install:
   - pip install -r requirements.txt
   - pip install coverage
   - pip install python-coveralls
-  - pip install nose
-  - pip install mock
+#  - pip install nose
+#  - pip install mock
   
 script: 
    - cd source
