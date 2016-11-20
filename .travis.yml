@@ -17,9 +17,9 @@ script:
    - export PYTHONPATH=$PYTHONPATH:$(pwd)
    - cd ../tests
    #- nosetests -v --with-coverage --rcfile=.coveragerc
-   - coverage run -m --rcfile=.coveragerc nose.core test_register.py test_serial.py 
-   - coverage report -m --rcfile=.coveragerc
+   - coverage run -m nose.core test_register.py test_serial.py
+   - coverage report -m --omit=*/site-packages/*
 
 after_success:
-   - coveralls --rcfile=.coveragerc
+   - coveralls
 
