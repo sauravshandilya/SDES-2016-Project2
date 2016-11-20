@@ -11,7 +11,7 @@ before_install:
   - pip install nose
   - pip install mock
   
-script: python tests/test_register.py
+script: python setup.py develop && nosetests -w tests
 
 after_success:
   - coveralls
