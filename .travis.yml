@@ -15,6 +15,7 @@ before_install:
 script: 
    - cd source
    - export PYTHONPATH=$PYTHONPATH:$(pwd)
+   - cd tests
    - nosetests -v
 
 after_success:
