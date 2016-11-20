@@ -3,7 +3,7 @@ import os
 import unittest
 import mock
 
-sys.path.append('../source/')
+#sys.path.append('../source/')
 
 
 from serial_connection import serial_port_connection
