@@ -56,7 +56,7 @@ def serial_open(baudrate):
 	'''
 	port_detect = glob("/dev/ttyUSB*") # stores all /dev/ttyUSB* into a list port_detect
 	
-	try:
+	try: # pragma: no cover
 		port = serial_port_connection(port_detect,baudrate)
 				
 		if port.isOpen() == True:
@@ -68,18 +68,7 @@ def serial_open(baudrate):
 		print "No USB port detected....check connection"
 		sys.exit(0)     # stop program execution when exception occur
 		
-#-------------------Open Communication/Serial Port Starts-----------------------
 
-#**********************Close Communication/Serial Port Starts*********************  
-def serial_close():
-	"""
-	Description: Close serial port
-
-	Parameter: None
-
-	"""
-	port.close()
-#**********************Close Communication/Serial Port Ends*********************
 
 
 
