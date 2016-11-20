@@ -9,7 +9,9 @@ before_install:
   - pip install nosetests
   - pip install mock
   
-script: python tests/test_register.py
+script: cd source
+        export PYTHONPATH=$PYTHONPATH:$(pwd)
+        nosetests -v
 
 after_success:
   - coveralls
