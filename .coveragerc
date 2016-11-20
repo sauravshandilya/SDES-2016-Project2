@@ -3,24 +3,14 @@ omit =
     */python?.?/*
     */lib-python/?.?/*.py
     */lib_pypy/_*.py
-    */site-packages/nose/*
     */site-packages/*
     */unittest2/*
-    serial/serialposix.py
-    */funcsigs/*
-    */mock/mock.py
-    */funcsigs.py
     *__init__*   
 [report]
 omit =  
     */python?.?/*
     */lib-python/?.?/*.py
     */lib_pypy/_*.py
-    */site-packages/nose/*
     */site-packages/*
     */unittest2/*
-    serial/serialposix.py
-    */funcsigs/*
-    */mock/mock.py
-    */funcsigs.py
     *__init__*
