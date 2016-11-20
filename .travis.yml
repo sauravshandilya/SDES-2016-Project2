@@ -19,5 +19,5 @@ script:
    - nosetests -v --with-coverage
 
 after_success:
-   - coveralls --rcfile=.coveragerc
+   - coveralls
 
