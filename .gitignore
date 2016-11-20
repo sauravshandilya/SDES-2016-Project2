@@ -3,7 +3,6 @@
 *.save
 
 # C files
-*.hex
 *.atsln
 *.atsuo
 *.cproj

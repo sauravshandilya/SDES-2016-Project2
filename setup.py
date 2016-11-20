@@ -8,11 +8,10 @@ setup(name='robotapi',
       license='BSD',
       scripts=[],
       url='https://github.com/sauravshandilya/SDES-2016-Project2',
-      packages=['source','tests'],
+      packages=['source'],
       install_requires=[
         "mock",
-        "serial",
-        "unittest",
+        "pyserial",
         "nose",
       ],
 )
