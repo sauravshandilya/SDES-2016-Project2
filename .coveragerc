@@ -2,7 +2,7 @@
 
 omit =  
     */python?.?/*
-    */python?/*
+      */python?/*
     */site-packages/nose/*
     *__init__*
     
@@ -10,6 +10,6 @@ omit =
 
 omit =  
     */python?.?/*
-    */python?/*
+      */python?/*
     */site-packages/nose/*
     *__init__*
