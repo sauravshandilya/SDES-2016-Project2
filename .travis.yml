@@ -16,6 +16,7 @@ script:
    - cd source
    - export PYTHONPATH=$PYTHONPATH:$(pwd)
    - cd ../tests
+   - coverage -m run nose.core test_serial.py test_register.py --omit= */site-packages/*
    - nosetests --with-coverage -v
 
 after_success:
