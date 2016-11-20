@@ -23,3 +23,9 @@ Debug/
 
 #Sphinx files
 docs/build/
+
+#package
+*.egg
+*.egg-info
+
+dist/
