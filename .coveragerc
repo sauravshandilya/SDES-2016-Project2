@@ -10,8 +10,7 @@ omit =
     */funcsigs/*
     */mock/mock.py
     */funcsigs.py
-    *__init__*
-    
+    *__init__*   
 [report]
 omit =  
     */python?.?/*
