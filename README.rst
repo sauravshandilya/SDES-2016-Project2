@@ -1,6 +1,6 @@
-********************
-Description 
-********************
+===============================================
+roboapi - Python API for mobile robot control
+===============================================
 
 Write a Python API for controlling a mobile robot.
 
@@ -13,10 +13,9 @@ Thus objective of API is to provide user ability to control hardware and perform
 .. _Raspberry Pi: https://www.raspberrypi.org/
 .. _Firebird V: http://www.nex-robotics.com/products/fire-bird-v-robots/fire-bird-v-atmega2560-robotic-research-platform.html
 
+Documentation
+===============
 
-Salient Features
-------------------
+Documentation and details about project is hosted on `Read the Docs`_
 
- - Python API to provide abstraction over Embedded C. User need to know only Python language.
- - Higher level Abstraction to allow user eaisly control the hardwares on-board the robot such buzzer, LEDs, and Motors. 
- - Lower Register-level control for robot's microcontroller - to allow easy integration on add on-hardware on any pin of the microcontroller.
+.. _Read the Docs: http://sdes-2016-project2.readthedocs.io
