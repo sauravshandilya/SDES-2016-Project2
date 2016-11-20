@@ -13,8 +13,10 @@ before_install:
 #  - pip install mock
   
 script: 
-   - coverage run --rcfile=.coveragerc source tests
-   - coverage report --rcfile=.coveragerc
+   #- cd source
+   #- export PYTHONPATH=$PYTHONPATH:$(pwd)
+   #- cd ../tests
+   -nosetests -v --with-coverage --cover-tests --cover-package=source tests 
 
 after_success:
    - coveralls --rcfile=.coveragerc
