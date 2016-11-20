@@ -1,7 +1,15 @@
+[run]
+
+omit =  
+    */python?.?/*
+    */python?/*
+    */site-packages/nose/*
+    *__init__*
+    
 [report]
 
 omit =  
     */python?.?/*
-	*/python?/*
+    */python?/*
     */site-packages/nose/*
     *__init__*
