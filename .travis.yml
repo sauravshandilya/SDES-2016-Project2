@@ -16,7 +16,7 @@ script:
    #- cd source
    #- export PYTHONPATH=$PYTHONPATH:$(pwd)
    #- cd ../tests
-   -nosetests -v --with-coverage --cover-tests --cover-package=source tests 
+   - nosetests -v --with-coverage --cover-tests --cover-package=source tests 
 
 after_success:
    - coveralls --rcfile=.coveragerc
