@@ -5,7 +5,7 @@ roboapi - Python API for mobile robot control
     :target: https://travis-ci.org/travis-ci/travis-web
 
 .. image:: https://coveralls.io/repos/github/sauravshandilya/SDES-2016-Project2/badge.svg
-:target: https://coveralls.io/github/sauravshandilya/SDES-2016-Project2
+	:target: https://coveralls.io/github/sauravshandilya/SDES-2016-Project2
 
 
 Write a Python API for controlling a mobile robot.
@@ -18,6 +18,28 @@ Thus objective of API is to provide user ability to control hardware and perform
 
 .. _Raspberry Pi: https://www.raspberrypi.org/
 .. _Firebird V: http://www.nex-robotics.com/products/fire-bird-v-robots/fire-bird-v-atmega2560-robotic-research-platform.html
+
+
+Installation
+===============
+
+Package can be installed in following two ways
+
+- Install the package from pypi_
+
+.. _pypi: https://pypi.python.org/pypi/robotapi
+
+To Install from pypi, type following command in terminal::
+	
+	pip install robotapi
+
+- Clone the repository from Github
+
+To Clone the repository from Github, type following command in terminal::
+
+	git clone https://github.com/sauravshandilya/SDES-2016-Project2
+	cd SDES-2016-Project2
+	python setup.py install
 
 Documentation
 ===============

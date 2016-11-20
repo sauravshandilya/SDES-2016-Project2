@@ -1,4 +1,4 @@
-Description of roboapi
+API Documentation
 =======================
 
 .. toctree::
