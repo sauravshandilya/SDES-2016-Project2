@@ -3,13 +3,13 @@ import os
 import unittest
 import mock
 
-module_path = os.path.dirname(os.path.curdir + "." + os.path.sep)
-sys.path.insert(0, os.path.abspath(module_path+"/source"))
+#module_path = os.path.dirname(os.path.curdir + "." + os.path.sep)
+#sys.path.insert(0, os.path.abspath(module_path+"/source"))
 
 
 
-from serial_connection import serial_port_connection
-from roboapi import Atmega,Buzzer
+from source.serial_connection import serial_port_connection
+from source.roboapi import Atmega,Buzzer
 
 Test_object=Atmega(9600)
  
