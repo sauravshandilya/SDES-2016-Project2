@@ -13,8 +13,7 @@ before_install:
   - pip install mock
   
   
-#script:
-  #- nosetests --with-coverage -v
+
 
 install:
   - python setup.py install
