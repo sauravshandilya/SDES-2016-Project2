@@ -6,13 +6,20 @@
 Python API for Mobile Robot Control
 ===============================================================
 
-Welcome to Documentation
+Welcome to Documentation of Projects
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
+   Description
+   Installation Instructions
+   Using the API
+   Issues
+   modules
+   Future Enhancements
+   Contacts Credits
 
 
 Indices and tables
