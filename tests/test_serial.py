@@ -4,6 +4,7 @@ import sys
 import os
 
 
+
 module_path = os.path.dirname(os.path.curdir + "." + os.path.sep)
 sys.path.insert(0, os.path.abspath(module_path+"/source"))
 
@@ -21,6 +22,7 @@ class Serialtest(unittest.TestCase):
   @mock.patch('serial_connection.serial.Serial')
   @mock.patch('serial_connection.glob')
   def Test_serial_port_connection(self,mock_glob,mock_serial_port):
+    '''test for correct serial port open '''
     self.portdetect=['ttyUSB0','ttyUSB1']
     self.baudrate=9600
     mock_glob('ttyUSB0')
@@ -33,6 +35,7 @@ class Serialtest(unittest.TestCase):
   @mock.patch('serial_connection.glob')
   @mock.patch('serial_connection.serial.Serial')
   def Test_serial_open(self,mock_serial_port,mock_serial_port_path,mock_sys_call):
+    '''test to check for serial port exception '''
     mock_serial_port_path('ttyUSB0')
     self.portdetect=['ttyUSB0','ttyUSB1']
     self.baudrate=9600
@@ -43,6 +46,7 @@ class Serialtest(unittest.TestCase):
   @mock.patch('serial_connection.glob')
   @mock.patch('serial_connection.serial.Serial')
   def Test_serial_write(self,mock_serial_port,mock_glob):
+    '''test for serial port write calls'''
     self.portdetect=['ttyUSB0','ttyUSB1']
     self.baudrate=9600
     #mock_glob('ttyUSB0')
@@ -57,7 +61,8 @@ class Serialtest(unittest.TestCase):
     
   @mock.patch('serial_connection.sys')
   @mock.patch('serial_connection.serial.Serial.isOpen')
-  def Test_serial_close(self,mock_serial_port,mock_system_call):
+  def Test_serial_close_exception(self,mock_serial_port,mock_system_call):
+    '''check for exit call when the port is closed'''
     self.portdetect=['ttyUSB0','ttyUSB1']
     self.baudrate=9600
     serial_open(self.baudrate)
